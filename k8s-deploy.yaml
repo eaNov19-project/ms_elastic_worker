@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elastic-worker-ms
+  labels:
+    app: elastic-worker-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elastic-worker-ms
+  template:
+    metadata:
+      labels:
+        app: elastic-worker-ms
+    spec:
+      containers:
+        - name: elastic-worker-ms
+          image: islamahmad/elastic-worker-ms:1.0.0
+          ports:
+            - containerPort: 8080
+          env:
+            #MONGODB
+            - name: MONGODB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: elastic-worker-ms
+                  key: MONGODB_HOST
+            - name: MONGODB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: elastic-worker-ms
+                  key: MONGODB_USERNAME
+            - name: MONGODB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: elastic-worker-ms
+                  key: MONGODB_PORT
+            - name: MONGODB_PASS
+              valueFrom:
+                configMapKeyRef:
+                  name: elastic-worker-ms
+                  key: MONGODB_PASS
+            - name: MONGODB_AUTH
+              valueFrom:
+                configMapKeyRef:
+                  name: elastic-worker-ms
+                  key: MONGODB_AUTH
+            - name: MONGODB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: elastic-worker-ms
+                  key: MONGODB_DATABASE
+            #KAFKA
+            - name: TOPIC_NEW_QUESTION
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-global
+                  key: TOPIC_NEW_QUESTION
+            - name: SUBS_NEW_QUESTION_ELASTIC
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-global
+                  key: SUBS_NEW_QUESTION_ELASTIC
