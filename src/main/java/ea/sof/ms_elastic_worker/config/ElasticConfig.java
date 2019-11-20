@@ -37,7 +37,7 @@ public class ElasticConfig {
         TransportClient client = null;
         try{
             Settings settings = Settings.builder()
-//                    .put("cluster.name", "elasticsearch")
+                    .put("cluster.name", "elastic")
 //                    .put("client.transport.sniff", false)
                     .build();
             client = new PreBuiltTransportClient(settings);
