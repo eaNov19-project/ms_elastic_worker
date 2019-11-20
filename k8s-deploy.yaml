@@ -16,41 +16,11 @@ spec:
     spec:
       containers:
         - name: elastic-worker-ms
-          image: islamahmad/elastic-worker-ms:1.0.0
+          image: islamahmad/eaproj-elastic-workerms:1.0.1
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
-            #MONGODB
-            - name: MONGODB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: elastic-worker-ms
-                  key: MONGODB_HOST
-            - name: MONGODB_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  name: elastic-worker-ms
-                  key: MONGODB_USERNAME
-            - name: MONGODB_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: elastic-worker-ms
-                  key: MONGODB_PORT
-            - name: MONGODB_PASS
-              valueFrom:
-                configMapKeyRef:
-                  name: elastic-worker-ms
-                  key: MONGODB_PASS
-            - name: MONGODB_AUTH
-              valueFrom:
-                configMapKeyRef:
-                  name: elastic-worker-ms
-                  key: MONGODB_AUTH
-            - name: MONGODB_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: elastic-worker-ms
-                  key: MONGODB_DATABASE
             #KAFKA
             - name: TOPIC_NEW_QUESTION
               valueFrom:
@@ -62,3 +32,23 @@ spec:
                 configMapKeyRef:
                   name: kafka-global
                   key: SUBS_NEW_QUESTION_ELASTIC
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: services-global
+                  key: KAFKA_BOOTSTRAP_SERVERS
+            - name: ELASTIC_SEARCH_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: elastic-worker-ms
+                  key: ELASTIC_SEARCH_HOST
+            - name: ELASTIC_SEARCH_TRANSPORT_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: elastic-worker-ms
+                  key: ELASTIC_SEARCH_TRANSPORT_PORT
+            - name: ELASTIC_QUESTION_INDEX
+              valueFrom:
+                configMapKeyRef:
+                  name: elastic-worker-ms
+                  key: ELASTIC_QUESTION_INDEX

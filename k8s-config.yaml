@@ -1,12 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: question-ms
+  name: elastic-worker-ms
   namespace: default
 data:
-  MONGODB_HOST: "TODO mongodb-sharded-1573848232.default.svc.cluster.local"
-  MONGODB_PORT: "27017"
-  MONGODB_PASS: "elastic_worker"
-  MONGODB_USERNAME: "elastic_worker"
-  MONGODB_DATABASE: "elastic_worker"
-  MONGODB_AUTH: "elastic_worker"
+  ELASTIC_SEARCH_HOST: "indexing-elastis-search-elasticsearch-coordinating-only.default.svc.cluster.local"
+  ELASTIC_SEARCH_TRANSPORT_PORT: "9300"
+  ELASTIC_QUESTION_INDEX: "questions"
+
