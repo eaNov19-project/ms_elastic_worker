@@ -4,7 +4,8 @@ metadata:
   name: elastic-worker-ms
   namespace: default
 data:
-  ELASTIC_SEARCH_HOST: "indexing-elastis-search-elasticsearch-coordinating-only.default.svc.cluster.local"
+  ELASTIC_SEARCH_HOST: "ies-elasticsearch-master.default.svc.cluster.local"
+#  ELASTIC_SEARCH_HOST: "35.238.81.119"
   ELASTIC_SEARCH_TRANSPORT_PORT: "9300"
   ELASTIC_QUESTION_INDEX: "questions"
 

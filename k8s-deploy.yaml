@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: elastic-worker-ms
-          image: islamahmad/eaproj-elastic-workerms:1.0.1
+          image: islamahmad/eaproj-elastic-workerms:1.0.2
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
