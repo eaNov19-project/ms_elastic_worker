@@ -1,7 +1,6 @@
 package ea.sof.ms_elastic_worker;
 
 import com.google.gson.Gson;
-import ea.sof.ms_elastic_worker.config.ElasticConfig;
 import ea.sof.ms_elastic_worker.service.ElasticService;
 import ea.sof.shared.queue_models.QuestionQueueModel;
 import org.slf4j.Logger;
@@ -20,16 +19,16 @@ public class QuestionsListener {
 	@KafkaListener(topics = "${topicNewQuestion}", groupId = "${subsNewQuestionElastic}")
 	public void newQuestion(String message) {
 
-		System.out.println("New message from topicNewQuestion topic: " + message);
+		LOGGER.info("New message from topicNewQuestion topic: " + message);
 
 		Gson gson = new Gson();
         QuestionQueueModel question =  gson.fromJson(message, QuestionQueueModel.class);
 
-		System.out.println("Question object: " + question);
+//		LOGGER.info("Question object: " + question);
 
 		//push to elasticsearch
         boolean res = elasticService.add(question);
-        System.out.println("Add question " + question + " to Elastic Search: " + res);
+//        System.out.println("Add question " + question + " to Elastic Search: " + res);
         LOGGER.info(String.format("Add question %s: %s", question.getId(), res));
 	}
 }

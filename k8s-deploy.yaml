@@ -16,39 +16,16 @@ spec:
     spec:
       containers:
         - name: elastic-worker-ms
-          image: islamahmad/eaproj-elastic-workerms:1.0.2
+          image: islamahmad/eaproj-elastic-workerms:1.0.3
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          env:
-            #KAFKA
-            - name: TOPIC_NEW_QUESTION
-              valueFrom:
-                configMapKeyRef:
-                  name: kafka-global
-                  key: TOPIC_NEW_QUESTION
-            - name: SUBS_NEW_QUESTION_ELASTIC
-              valueFrom:
-                configMapKeyRef:
-                  name: kafka-global
-                  key: SUBS_NEW_QUESTION_ELASTIC
-            - name: KAFKA_BOOTSTRAP_SERVERS
-              valueFrom:
-                configMapKeyRef:
-                  name: services-global
-                  key: KAFKA_BOOTSTRAP_SERVERS
-            - name: ELASTIC_SEARCH_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: elastic-worker-ms
-                  key: ELASTIC_SEARCH_HOST
-            - name: ELASTIC_SEARCH_TRANSPORT_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: elastic-worker-ms
-                  key: ELASTIC_SEARCH_TRANSPORT_PORT
-            - name: ELASTIC_QUESTION_INDEX
-              valueFrom:
-                configMapKeyRef:
-                  name: elastic-worker-ms
-                  key: ELASTIC_QUESTION_INDEX
+
+          envFrom:
+            - configMapRef:
+                name: elastic-worker-ms
+            - configMapRef:
+                name: services-global
+            - configMapRef:
+                name: kafka-global
+

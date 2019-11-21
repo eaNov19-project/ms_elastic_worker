@@ -1,14 +1,9 @@
 package ea.sof.ms_elastic_worker.config;
 
-import ea.sof.ms_elastic_worker.service.ElasticService;
-import org.elasticsearch.action.admin.indices.get.GetIndexRequest;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.TransportAddress;
-//import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +19,7 @@ public class ElasticConfig {
 
     @Value("${elasticsearch.host}")
     public String host;
+
     @Value("${elasticsearch.port}")
     public int port;
 
@@ -51,7 +47,6 @@ public class ElasticConfig {
                 client.admin().indices().prepareCreate(questionIndex)
 //                        .addMapping("_doc", "name", "type=text")
                         .get();
-
             }
             LOGGER.info(String.format("Connect to Elastic Engine host: %s, port: %s successfully!", host, port));
             return client;

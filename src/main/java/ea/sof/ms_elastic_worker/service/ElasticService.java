@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 
@@ -44,7 +43,7 @@ public class ElasticService {
             IndexResponse response = client.prepareIndex(questionIndex, docType)
                     .setSource(buildJSONObj(question))
                     .get();
-            System.out.println("response id:"+response.getId());
+//            System.out.println("response id:"+response.getId());
             LOGGER.info("Add Question " + question.getId() + " successfully!");
             return true;
         }
